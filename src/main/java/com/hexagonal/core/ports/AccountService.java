@@ -1,9 +1,9 @@
-package com.hexagonal.domain.ports;
+package com.hexagonal.core.ports;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.hexagonal.domain.model.Account;
+import com.hexagonal.core.domain.Account;
 
 public interface AccountService {
     

@@ -1,4 +1,4 @@
-package com.hexagonal.domain.model;
+package com.hexagonal.core.domain;
 
 public enum TransactionType {
     Debit,

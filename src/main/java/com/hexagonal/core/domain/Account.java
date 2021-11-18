@@ -1,4 +1,4 @@
-package com.hexagonal.domain.model;
+package com.hexagonal.core.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -55,6 +55,21 @@ public class Account {
         Transaction trans = new Transaction(new String("aaa"), value, description, TransactionType.Credit);
         this.transactionList.add(trans);
         this.balance = this.balance.add(value);
+    }
+
+    public void withdraw(BigDecimal value, String description) {
+        if (value.compareTo(this.balance) >0) {
+            throw new IllegalArgumentException("Withdraw is greater than account balance");
+        }
+        Transaction trans = new Transaction(new String("aaa"), value, description, TransactionType.Debit);
+        this.transactionList.add(trans);
+        this.balance = this.balance.subtract(value);
+    }
+
+    
+    public void transferTo(Account toDeposit, BigDecimal value, String description) {
+        this.withdraw(value, description);
+        toDeposit.deposit(value, description);
     }
 
 }
