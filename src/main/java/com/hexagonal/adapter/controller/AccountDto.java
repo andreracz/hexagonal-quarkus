@@ -1,13 +1,14 @@
 package com.hexagonal.adapter.controller;
 
 public class AccountDto {
-    private String accountId;
+    private String clientId;
 
-    public String getAccountId() {
-        return accountId;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
+
 }

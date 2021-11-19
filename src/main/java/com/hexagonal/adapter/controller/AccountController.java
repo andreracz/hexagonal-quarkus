@@ -39,9 +39,32 @@ public class AccountController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Account saveAccount(AccountDto account) {
-        return accountService.createAccount(account.getAccountId());
+        return accountService.createAccount(account.getClientId());
     }
 
+    @POST
+    @Path("{id}/deposit")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deposit(@PathParam("id") String accountId, FinancialTransactionDTO transactionDTO) {
+        accountService.deposit(accountId, transactionDTO.getValue(), transactionDTO.getDescription());
+    }
+
+    @POST
+    @Path("{id}/withdraw")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void withdraw(@PathParam("id") String accountId, FinancialTransactionDTO transactionDTO) {
+        accountService.withdraw(accountId, transactionDTO.getValue(), transactionDTO.getDescription());
+    }
+
+    @POST
+    @Path("{origin}/transferTo/{destination}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void transferTo(@PathParam("origin") String originId, @PathParam("destination") String destinationId, FinancialTransactionDTO transactionDTO) {
+        accountService.transfer(originId, destinationId, transactionDTO.getValue(), transactionDTO.getDescription());
+    }
     
 
 
