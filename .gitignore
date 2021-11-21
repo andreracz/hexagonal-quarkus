@@ -5,6 +5,7 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 release.properties
 
+
 # Eclipse
 .project
 .classpath
@@ -37,3 +38,7 @@ nb-configuration.xml
 
 # Local environment
 .env
+
+#h2
+*.db
+*.log

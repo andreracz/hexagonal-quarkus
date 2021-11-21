@@ -5,16 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 
 import com.hexagonal.core.domain.Account;
 import com.hexagonal.core.ports.AccountRepository;
 
-@ApplicationScoped
+//@ApplicationScoped
 public class AccountRepositoryImpl implements AccountRepository {
 
     private HashMap<String, Account> accounts = new HashMap<>();
 
     @Override
+    @Transactional
     public List<Account> listAccounts() {
         return new ArrayList<>(accounts.values());
     }
