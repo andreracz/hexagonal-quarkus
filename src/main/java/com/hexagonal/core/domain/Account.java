@@ -3,6 +3,7 @@ package com.hexagonal.core.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public class Account {
     }
 
     public void deposit(BigDecimal value, String description) {
-        Transaction trans = new Transaction(UUID.randomUUID().toString(), value, description, TransactionType.Credit);
+        Transaction trans = new Transaction(UUID.randomUUID().toString(), value, description, TransactionType.Credit, new Date());
         this.transactionList.add(trans);
         this.balance = this.balance.add(value);
     }
@@ -62,7 +63,7 @@ public class Account {
         if (value.compareTo(this.balance) >0) {
             throw new IllegalArgumentException("Withdraw is greater than account balance");
         }
-        Transaction trans = new Transaction(UUID.randomUUID().toString(), value, description, TransactionType.Debit);
+        Transaction trans = new Transaction(UUID.randomUUID().toString(), value, description, TransactionType.Debit, new Date());
         this.transactionList.add(trans);
         this.balance = this.balance.subtract(value);
     }

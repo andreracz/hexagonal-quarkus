@@ -56,6 +56,7 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
                              transaction.getValue(),
                              transaction.getDescription(),
                              transaction.getTransactionType(),
+                             transaction.getTransactionDate(),
                              account)).collect(Collectors.toList());
     }
 
@@ -69,7 +70,7 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
     }
 
     public static Transaction toTransaction(TransactionModel model) {
-        return new Transaction(model.getTransactionId(), model.getValue(), model.getDescription(), model.getTransactionType());
+        return new Transaction(model.getTransactionId(), model.getValue(), model.getDescription(), model.getTransactionType(), model.getTransactionDate());
     }
 
    

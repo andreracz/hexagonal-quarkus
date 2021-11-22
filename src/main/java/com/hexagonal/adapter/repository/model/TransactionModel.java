@@ -1,6 +1,7 @@
 package com.hexagonal.adapter.repository.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,7 @@ public class TransactionModel {
     private BigDecimal value;
     private String description;
     private TransactionType transactionType;
+    private Date transactionDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AccountModel account;
@@ -26,12 +28,22 @@ public class TransactionModel {
     public TransactionModel() {
 
     }
-    public TransactionModel(String transactionId, BigDecimal value, String description, TransactionType transactionType, AccountModel account) {
-    this.transactionId = transactionId;
-    this.value = value;
-    this.description = description;
-    this.transactionType = transactionType;
-    this.account = account;
+
+    public TransactionModel(String transactionId, BigDecimal value, String description, TransactionType transactionType, Date transactionDate, AccountModel account) {
+        this.transactionId = transactionId;
+        this.value = value;
+        this.description = description;
+        this.transactionType = transactionType;
+        this.account = account;
+        this.transactionDate = transactionDate;
+    }
+    
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
     }
     
 

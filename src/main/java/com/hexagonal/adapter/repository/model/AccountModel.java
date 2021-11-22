@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.hexagonal.core.domain.Account;
 
@@ -23,6 +24,7 @@ public class AccountModel {
     private String accountId;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OrderBy("transactionDate")
     private List<TransactionModel> transactionList;
 
     public BigDecimal getBalance() {
