@@ -12,6 +12,27 @@ public class Transaction {
 
     
     public Transaction(String transactionId, BigDecimal value, String description, TransactionType transactionType, Date transactionDate) {
+        if (transactionId == null) {
+            throw new IllegalArgumentException("TransactionId cannot be null");
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("Value cannot be null");
+        }
+        if (value.equals(BigDecimal.ZERO)) {
+            throw new IllegalArgumentException("Value cannot be zero");
+        }
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Value cannot be negative");
+        }
+        if (description == null) {
+            throw new IllegalArgumentException("Description cannot be null");
+        }
+        if (transactionType == null) {
+            throw new IllegalArgumentException("TransactionType cannot be null");
+        }
+        if (transactionDate == null) {
+            throw new IllegalArgumentException("TransactionDate cannot be null");
+        }
         this.transactionId = transactionId;
         this.value = value;
         this.description = description;
@@ -21,10 +42,6 @@ public class Transaction {
 
     public Date getTransactionDate() {
         return transactionDate;
-    }
-
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
     }
 
     public String getTransactionId() {

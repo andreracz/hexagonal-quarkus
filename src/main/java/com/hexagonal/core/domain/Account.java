@@ -17,6 +17,15 @@ public class Account {
     
 
     public Account(String clientId, String accountId, List<Transaction> transactionList) {
+        if (clientId == null) {
+            throw new IllegalArgumentException("ClientId cannot be null");
+        }
+        if (accountId == null) {
+            throw new IllegalArgumentException("AccountId cannot be null");
+        }
+        if (transactionList == null) {
+            throw new IllegalArgumentException("TransactionList cannot be null");
+        }
         this.clientId = clientId;
         this.accountId = accountId;
         this.transactionList = new ArrayList<Transaction>(transactionList);
@@ -24,14 +33,12 @@ public class Account {
         for (Transaction transaction : transactionList) {
             if(transaction.getTransactionType() == TransactionType.Credit) {
                 currentBalance = currentBalance.add(transaction.getValue());
-            } else if(transaction.getTransactionType() == TransactionType.Debit) {
-                currentBalance = currentBalance.subtract(transaction.getValue());
             } else {
-                throw new IllegalArgumentException("Transaction type invalid");
+                currentBalance = currentBalance.subtract(transaction.getValue());
+                if (currentBalance.compareTo(BigDecimal.ZERO) < 0) {
+                    throw new IllegalArgumentException("Balance should be greater than zero");
+                }
             }
-        }
-        if (currentBalance.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Balance should be greater than zero");
         }
         this.balance = currentBalance;
     }
